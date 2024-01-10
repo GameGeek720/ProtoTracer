@@ -16,7 +16,7 @@ private:
     WS35Controller controller = WS35Controller(&cameras, 50);
     MatthewFace pM;
     
-	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("AUDIO1"), F("AUDIO2"), F("AUDIO3")};
+	const __FlashStringHelper* faceArray[10] = {F("DEFAULT"), F("ANGRY"), F("DOUBT"), F("FROWN"), F("LOOKUP"), F("SAD"), F("HYPNO"), F("HEART"), F("ANGLE")};
 
     MaterialAnimator<7> backgroundMaterial;
 
