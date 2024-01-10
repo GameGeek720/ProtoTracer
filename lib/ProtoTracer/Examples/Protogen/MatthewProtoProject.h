@@ -25,16 +25,17 @@ private:
     Angle angle = Angle(Vector2D(-60, 50),Vector2D(125,75));
 
     void LinkControlParameters() override {
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::Anger), MatthewFace::Anger, 15, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::Sadness), MatthewFace::Sadness, 50, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::Surprised), MatthewFace::Surprised, 10, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::Doubt), MatthewFace::Doubt, 25, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::Frown), MatthewFace::Frown, 45, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::LookUp), MatthewFace::LookUp, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::LookDown), MatthewFace::LookDown, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::Angle), MatthewFace::Angle, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::HideEye), MatthewFace::HideEye, 30, 0.0f, 1.0f);
-        eEA.AddParameter(pM.GetMorphWeightReference(MatthewFace::HideBlush), MatthewFace::HideBlush, 30, 1.0f, 0.0f);
+        AddParameter(MatthewFace::Anger, pM.GetMorphWeightReference(MatthewFace::Anger), 15);
+        AddParameter(MatthewFace::Sadness, pM.GetMorphWeightReference(MatthewFace::Sadness), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
+        AddParameter(MatthewFace::Surprised, pM.GetMorphWeightReference(MatthewFace::Surprised), 15);
+        AddParameter(MatthewFace::Doubt, pM.GetMorphWeightReference(MatthewFace::Doubt), 15);
+        AddParameter(MatthewFace::Frown, pM.GetMorphWeightReference(MatthewFace::Frown), 15);
+        AddParameter(MatthewFace::LookUp, pM.GetMorphWeightReference(MatthewFace::LookUp), 15);
+        AddParameter(MatthewFace::LookDown, pM.GetMorphWeightReference(MatthewFace::LookDown), 15);
+        AddParameter(MatthewFace::Angle, pM.GetMorphWeightReference(MatthewFace::Angle), 15);
+        AddParameter(MatthewFace::HideEye, pM.GetMorphWeightReference(MatthewFace::HideEye), 15);
+
+        AddParameter(MatthewFace::HideBlush, pM.GetMorphWeightReference(MatthewFace::HideBlush), 15, IEasyEaseAnimator::InterpolationMethod::Cosine, true);
 
         AddViseme(Viseme::MouthShape::EE, pM.GetMorphWeightReference(MatthewFace::vrc_v_ee));
         AddViseme(Viseme::MouthShape::AH, pM.GetMorphWeightReference(MatthewFace::vrc_v_aa));
@@ -44,12 +45,7 @@ private:
         AddViseme(Viseme::MouthShape::OO, pM.GetMorphWeightReference(MatthewFace::vrc_v_oh));
         AddViseme(Viseme::MouthShape::SS, pM.GetMorphWeightReference(MatthewFace::vrc_v_ss));
 
-        eEA.AddParameter(&offsetFace, offsetFaceInd, 40, 0.0f, 1.0f);
-        eEA.AddParameter(&offsetFaceSA, offsetFaceIndSA, 40, 0.0f, 1.0f);
-        eEA.AddParameter(&offsetFaceARG, offsetFaceIndARG, 40, 0.0f, 1.0f);
-        eEA.AddParameter(&offsetFaceOSC, offsetFaceIndOSC, 40, 0.0f, 1.0f);
-
-        blink.AddParameter(pM.GetMorphWeightReference(MatthewFace::Blink));
+        AddBlinkParameter(pM.GetMorphWeightReference(MatthewFace::Blink));
     }
 
     void SetMaterialLayers() {
@@ -75,51 +71,51 @@ private:
     void Default(){}
 
     void Angry(){
-        eEA.AddParameterFrame(MatthewFace::Anger, 1.0f);
+        AddParameterFrame(MatthewFace::Anger, 1.0f);
     } 
 
     void Sad(){
-        eEA.AddParameterFrame(MatthewFace::Sadness, 1.0f);
-        eEA.AddParameterFrame(MatthewFace::Frown, 1.0f);
+        AddParameterFrame(MatthewFace::Sadness, 1.0f);
+        AddParameterFrame(MatthewFace::Frown, 1.0f);
     }
 
     void Surprised(){
-        eEA.AddParameterFrame(MatthewFace::Angle, 1.0f);
-        eEA.AddParameterFrame(MatthewFace::HideBlush, 0.0f);
+        AddParameterFrame(MatthewFace::Angle, 1.0f);
+        AddParameterFrame(MatthewFace::HideBlush, 0.0f);
         blinkSet = false;
     }
     
     void Doubt(){
-        eEA.AddParameterFrame(MatthewFace::Doubt, 1.0f);
+        AddParameterFrame(MatthewFace::Doubt, 1.0f);
     }
     
     void Frown(){
-        eEA.AddParameterFrame(MatthewFace::Frown, 1.0f);
+        AddParameterFrame(MatthewFace::Frown, 1.0f);
     }
 
     void LookUp(){
-        eEA.AddParameterFrame(MatthewFace::LookUp, 1.0f);
+        AddParameterFrame(MatthewFace::LookUp, 1.0f);
     }
 
     void LookDown(){
-        eEA.AddParameterFrame(MatthewFace::LookDown, 1.0f);
+        AddParameterFrame(MatthewFace::LookDown, 1.0f);
     }
 
     void SpiralEyes(){
-        eEA.AddParameterFrame(MatthewFace::HideEye, 1.0f);
+        AddParameterFrame(MatthewFace::HideEye, 1.0f);
         backgroundMaterial.AddMaterialFrame(spiral, 1.0f);
         spiral.Update();
         blinkSet = false;
     }
 
     void HeartEyes(){
-        eEA.AddParameterFrame(MatthewFace::HideEye, 1.0f);
+        AddParameterFrame(MatthewFace::HideEye, 1.0f);
         backgroundMaterial.AddMaterialFrame(heart, 1.0f);
         blinkSet = false;
     }
 
     void AngleEyes(){
-        eEA.AddParameterFrame(MatthewFace::HideEye, 1.0f);
+        AddParameterFrame(MatthewFace::HideEye, 1.0f);
         backgroundMaterial.AddMaterialFrame(angle, 1.0f);
         blinkSet = false;
     }
@@ -138,6 +134,7 @@ public:
         SetMaterialLayers();
 
         hud.SetFaceArray(faceArray);
+
     }
 
     void Update(float ratio) override {
@@ -178,7 +175,7 @@ public:
         pM.SetMorphWeight(MatthewFace::MoveEye, 1.0f);
 
         pM.Update();
-
+        
         AlignObjectFace(pM.GetObject(), -7.5f);
 
         SetWiggleSpeed(0.0f);
