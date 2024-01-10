@@ -4,11 +4,11 @@
 #include "Examples\Protogen\ProtogenHardwareTest.h"
 #endif
 
-#include "Examples\Protogen\ProtogenHUB75Project.h"
-//#include "Examples\Protogen\ProtogenWS35Project.h"
+//#include "Examples\Protogen\ProtogenHUB75Project.h"
+#include "Examples\Protogen\MatthewProtoProject.h"
 //#include "Examples\VerifyEngine.h"
 
-ProtogenHUB75Project project;
+MatthewProtoProject project;
 
 void setup() {
     Serial.begin(115200);

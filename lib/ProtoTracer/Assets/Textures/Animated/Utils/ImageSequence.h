@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Arduino.h"
-#include "..\Materials\Image.h"
-#include "..\Materials\Material.h"
+#include "..\..\..\..\Scene\Materials\Static\Image.h"
+#include "..\..\..\..\Scene\Materials\Material.h"
 
 class ImageSequence : public Material{
 private:
@@ -57,7 +57,7 @@ public:
         image->SetData(data[currentFrame]);
     }
 
-    RGBColor GetRGB(Vector3D intersection, Vector3D normal, Vector3D uvw){
-        return image->GetRGB(intersection, normal, uvw);
+    RGBColor GetRGB(const Vector3D& position, const Vector3D& normal, const Vector3D& uvw) override {
+        return image->GetRGB(position, normal, uvw);
     }
 };

@@ -10,7 +10,8 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "memory": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "*.tpp": "cpp"
     },
     "cmake.configureOnOpen": true,
     "C_Cpp.errorSquiggles": "disabled"

@@ -16,6 +16,8 @@ private:
     static uint8_t pin;
     static bool holdingState;
     static bool previousState;
+    static uint8_t pressCount;
+    static long lastPress;
 
     static void UpdateState();
     static uint8_t ReadEEPROM(uint16_t index);

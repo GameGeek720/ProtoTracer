@@ -29,7 +29,7 @@
 
 //Default Project base for Analog microphone, APDS9960 boop sensor, and button control
 class ProtogenProject : public Project {
-private:
+protected:
     Background background;
 
     Vector2D camMin = Vector2D(0.0f, 0.0f);
@@ -99,7 +99,7 @@ private:
     void UpdateFFTVisemes();
     void SetMaterialColor();
 
-protected:
+//protected:
     enum Color{
         CBASE,
         CYELLOW,

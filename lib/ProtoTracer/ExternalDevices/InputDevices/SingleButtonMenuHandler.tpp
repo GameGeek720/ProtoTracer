@@ -27,35 +27,63 @@ bool MenuHandler<menuCount>::holdingState;
 template <uint8_t menuCount>
 bool MenuHandler<menuCount>::previousState;
 
+template<uint8_t menuCount>
+uint8_t MenuHandler<menuCount>::pressCount = 0;
+
+template<uint8_t menuCount>
+long MenuHandler<menuCount>::lastPress = 0;
+
 template <uint8_t menuCount>
 void MenuHandler<menuCount>::UpdateState() {
     long currentTime = millis();
-    bool pinState = digitalRead(pin);
-    long timeOn = 0;
+        bool pinState = digitalRead(pin);
+        long timeOn = 0;
 
-    if (pinState && !previousState) {  // Pin not pressed, not triggered -> reset time
-        previousMillisHold = currentTime;
-    } else if (pinState && previousState) {  // Pin not pressed, was triggered -> measure time
-        timeOn = currentTime - previousMillisHold;
+        if (currentTime - lastPress > 200)
+        {
+            pressCount = 0;
+        }
 
-        previousState = false;
-    } else if (!pinState) {  // Pin is pressed,
-        previousState = true;
-    }
+        if (currentTime > lastPress + 300000 && currentValue[0] == 100) {
+            currentValue[0] = 0;
+        }
+        
+        if(pinState && !previousState){//pin not pressed, not triggered -> reset time
+            previousMillisHold = currentTime;
+        }
+        else if (pinState && previousState){//pin not pressed, was triggered -> measure time
+            timeOn = currentTime - previousMillisHold;
+            previousState = false;
+        }
+        else if (!pinState){//pin is pressed,
+            previousState = true;
+        }
 
-    if (timeOn > holdingTime && pinState) {
-        previousMillisHold = currentTime;
+        if(timeOn > holdingTime && pinState){
+            previousMillisHold = currentTime;
 
-        WriteEEPROM(currentMenu, currentValue[currentMenu]);
+            WriteEEPROM(currentMenu, currentValue[currentMenu]);
 
-        currentMenu += 1;
-        if (currentMenu >= menuCount) currentMenu = 0;
-    } else if (timeOn > 50 && pinState) {
-        previousMillisHold = currentTime;
+            if (timeOn > holdingTime * 4) {
+                currentMenu = 0;
+                currentValue[0] = 0;
+            } else {
+                currentMenu += 1;
+                if (currentMenu >= menuCount) currentMenu = 0;
+            }
+        } else if(timeOn > 50 && pinState){
+            pressCount++;
+            lastPress = currentTime;
+            if (pressCount == 2) {
+                currentMenu = 0;
+                currentValue[0] = 100;
+            } else {
+                previousMillisHold = currentTime;
 
-        currentValue[currentMenu] += 1;
-        if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
-    }
+                currentValue[currentMenu] += 1;
+                if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
+            }
+        }
 }
 
 template <uint8_t menuCount>
