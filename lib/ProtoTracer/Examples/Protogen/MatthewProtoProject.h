@@ -142,6 +142,8 @@ public:
 
         uint8_t mode = Menu::GetFaceState();//change by button press
 
+        blinkSet = true;
+
         if (isBooped && mode < 6){
             Surprised();
         }
