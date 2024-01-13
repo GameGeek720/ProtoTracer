@@ -39,11 +39,6 @@ void MenuHandler<menuCount>::UpdateState() {
         bool pinState = digitalRead(pin);
         long timeOn = 0;
 
-        if (currentTime - lastPress > 200)
-        {
-            pressCount = 0;
-        }
-
         if (currentTime > lastPress + 300000 && currentValue[0] == 100) {
             currentValue[0] = 0;
         }
@@ -74,15 +69,20 @@ void MenuHandler<menuCount>::UpdateState() {
         } else if(timeOn > 50 && pinState){
             pressCount++;
             lastPress = currentTime;
+            
+            previousMillisHold = currentTime;
+
+            currentValue[currentMenu] += 1;
+            if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
+        }
+
+        if (currentTime - lastPress > 200)
+        {
             if (pressCount == 2) {
                 currentMenu = 0;
                 currentValue[0] = 100;
-            } else {
-                previousMillisHold = currentTime;
-
-                currentValue[currentMenu] += 1;
-                if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
             }
+            pressCount = 0;
         }
 }
 
