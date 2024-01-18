@@ -43,18 +43,18 @@ void MenuHandler<menuCount>::UpdateState() {
             currentValue[0] = 0;
         }
         
-        if(pinState && !previousState){//pin not pressed, not triggered -> reset time
+        if(!pinState && !previousState){//pin not pressed, not triggered -> reset time
             previousMillisHold = currentTime;
         }
-        else if (pinState && previousState){//pin not pressed, was triggered -> measure time
+        else if (!pinState && previousState){//pin not pressed, was triggered -> measure time
             timeOn = currentTime - previousMillisHold;
             previousState = false;
         }
-        else if (!pinState){//pin is pressed,
+        else if (pinState){//pin is pressed,
             previousState = true;
         }
 
-        if(timeOn > holdingTime && pinState){
+        if(timeOn > holdingTime && !pinState){
             previousMillisHold = currentTime;
 
             WriteEEPROM(currentMenu, currentValue[currentMenu]);
@@ -66,7 +66,7 @@ void MenuHandler<menuCount>::UpdateState() {
                 currentMenu += 1;
                 if (currentMenu >= menuCount) currentMenu = 0;
             }
-        } else if(timeOn > 50 && pinState){
+        } else if(timeOn > 50 && !pinState){
             pressCount++;
             lastPress = currentTime;
             
@@ -107,7 +107,7 @@ bool MenuHandler<menuCount>::Initialize(uint8_t pin, uint16_t holdingTime) {
 
     MenuHandler::previousState = false;
 
-    pinMode(pin, INPUT_PULLUP);
+    pinMode(pin, INPUT_PULLDOWN);
 
     MenuHandler::pin = pin;
     MenuHandler::holdingTime = holdingTime;
