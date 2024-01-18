@@ -35,4 +35,4 @@ public:
     static uint8_t GetCurrentMenu();
 };
 
-#include "SingleButtonMenuHandler.tpp"
+#include "MultiButtonMenuHandler.tpp"

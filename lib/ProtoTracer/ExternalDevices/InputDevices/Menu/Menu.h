@@ -23,7 +23,7 @@
 #ifdef NEOTRELLISMENU
 #include "..\NeoTrellisMenuHandler.h"
 #else
-#include "..\SingleButtonMenuHandler.h"
+#include "..\MultiButtonMenuHandler.h"
 #endif
 
 class Menu {
