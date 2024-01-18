@@ -46,7 +46,10 @@ protected:
     float yOffset = 0.0f;
 
     uint8_t microphonePin = 0;
-    uint8_t buttonPin = 0;
+    uint8_t facePin = 0;
+    uint8_t menuPin = 0;
+    uint8_t resetPin = 0;
+    uint8_t holdPin = 0;
     uint8_t faceCount = 10;
     
     //Materials
@@ -164,7 +167,7 @@ protected:
     Material* GetBackgroundMaterial();
 
 public:
-    ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount);
+    ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t facePin, uint8_t menuPin, uint8_t resetPin, uint8_t holdPin, uint8_t faceCount);
 
     void Initialize() override;
 

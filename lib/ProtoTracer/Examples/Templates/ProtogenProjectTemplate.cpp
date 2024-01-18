@@ -393,11 +393,14 @@ Material* ProtogenProject::GetBackgroundMaterial(){
     return &backgroundMaterial;
 }
 
-ProtogenProject::ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t buttonPin, uint8_t faceCount) : Project(cameras, controller, numObjects + 1) {
+ProtogenProject::ProtogenProject(CameraManager* cameras, Controller* controller, uint8_t numObjects, Vector2D camMin, Vector2D camMax, uint8_t microphonePin, uint8_t facePin, uint8_t menuPin, uint8_t resetPin, uint8_t holdPin, uint8_t faceCount) : Project(cameras, controller, numObjects + 1) {
     this->camMin = camMin;
     this->camMax = camMax;
     this->microphonePin = microphonePin;
-    this->buttonPin = buttonPin;
+    this->facePin = facePin;
+    this->menuPin = menuPin;
+    this->resetPin = resetPin;
+    this->holdPin = holdPin;
     this->faceCount = faceCount;
 
     this->scene.AddObject(background.GetObject());
@@ -441,6 +444,6 @@ void ProtogenProject::Initialize() {
     #ifdef NEOTRELLISMENU
     Menu::Initialize(faceCount);//NeoTrellis
     #else
-    Menu::Initialize(faceCount, buttonPin, 500);//7 is number of faces
+    Menu::Initialize(faceCount, facePin, menuPin, resetPin, holdPin);//7 is number of faces
     #endif
 }

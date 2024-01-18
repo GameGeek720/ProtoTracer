@@ -121,7 +121,7 @@ private:
     }
 
 public:
-    MatthewProtoProject() : ProtogenProject(&cameras, &controller, 1, Vector2D(), Vector2D(192.0f, 105.0f), 22, 0, 9){
+    MatthewProtoProject() : ProtogenProject(&cameras, &controller, 1, Vector2D(), Vector2D(192.0f, 105.0f), 22, 0, 1, 3, 4, 9){
         scene.AddObject(pM.GetObject());
 
         pM.GetObject()->SetMaterial(GetFaceMaterial());
@@ -134,6 +134,8 @@ public:
         SetMaterialLayers();
 
         hud.SetFaceArray(faceArray);
+
+        
 
     }
 
@@ -157,6 +159,10 @@ public:
             else if (mode == 6) SpiralEyes();
             else if (mode == 7) HeartEyes();
             else if (mode == 8) AngleEyes();
+            else if (mode == 69)
+            {
+                AddParameterFrame(MatthewFace::HideEye, 1.0f);
+            }
             else {
                 Default();
                 blinkSet = false;

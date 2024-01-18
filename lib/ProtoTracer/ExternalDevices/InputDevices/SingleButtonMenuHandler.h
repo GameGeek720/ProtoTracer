@@ -13,11 +13,13 @@ private:
     static uint8_t currentMenu;
     static uint8_t currentValue[menuCount];
     static uint8_t maxValue[menuCount];
-    static uint8_t pin;
-    static bool holdingState;
     static bool previousState;
-    static uint8_t pressCount;
-    static long lastPress;
+    static uint8_t facePin;
+    static uint8_t menuPin;
+    static uint8_t resetPin;
+    static uint8_t holdPin;
+    static long resetTime;
+    static int pinNum;
 
     static void UpdateState();
     static uint8_t ReadEEPROM(uint16_t index);
@@ -25,7 +27,7 @@ private:
 
 public:
     static void Begin();
-    static bool Initialize(uint8_t pin, uint16_t holdingTime);
+    static bool Initialize(uint8_t facePin, uint8_t menuPin, uint8_t resetPin, uint8_t holdPin);
     static void SetDefaultValue(uint16_t menu, uint8_t value);
     static void SetInitialized();
     static void SetMenuMax(uint8_t menu, uint8_t maxValue);

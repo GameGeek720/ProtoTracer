@@ -107,7 +107,7 @@ private:
     static void SetDefaultEntries();
 
 public:
-    static void Initialize(uint8_t faceCount, uint8_t pin, uint16_t holdingTime, Vector2D size = Vector2D(240, 50));
+    static void Initialize(uint8_t faceCount, uint8_t facePin, uint8_t menuPin, uint8_t resetPin, uint8_t holdPin, Vector2D size = Vector2D(240, 50));
     static void Initialize(uint8_t faceCount, Vector2D size = Vector2D(240, 50));
     static Material* GetMaterial();
     static Effect* GetEffect();
