@@ -81,21 +81,21 @@ void MenuHandler<menuCount>::UpdateState() {
     if(timeOn > 50 && !pinState){
         previousMillisHold = currentTime;
         switch(pinNum) {
-            case 1:
+            case 1: // advance face
                 currentValue[currentMenu] += 1;
                 if (currentValue[currentMenu] >= maxValue[currentMenu]) currentValue[currentMenu] = 0;
                 break;
-            case 2:
+            case 2: // advance menu
                 WriteEEPROM(currentMenu, currentValue[currentMenu]);
                 currentMenu += 1;
                 if (currentMenu >= menuCount) currentMenu = 0;
                 break;
-            case 3: 
+            case 3: // reset
                 WriteEEPROM(currentMenu, currentValue[currentMenu]);
                 currentMenu = 0;
                 currentValue[0] = 0;
                 break;
-            case 4:
+            case 4: // hold
                 currentMenu = 0;
                 currentValue[0] = 100;
                 resetTime = currentTime + 300000;
