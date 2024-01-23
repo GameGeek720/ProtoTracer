@@ -142,6 +142,9 @@ public:
     void Update(float ratio) override {
         pM.Reset();
 
+        controller.SetBrightness(Menu::GetBrightness());
+        controller.SetAccentBrightness(Menu::GetAccentBrightness());
+
         uint8_t mode = Menu::GetFaceState();//change by button press
 
         blinkSet = true;

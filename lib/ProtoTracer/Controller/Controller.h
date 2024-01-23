@@ -6,7 +6,7 @@
 
 class Controller {
 private:
-    const uint32_t softStart = 5000000; // microseconds
+    const uint32_t softStart = 0; // microseconds
     uint32_t previousTime;
 
 protected:
