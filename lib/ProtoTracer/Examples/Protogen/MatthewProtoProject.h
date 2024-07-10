@@ -24,6 +24,8 @@ private:
     Heart heart = Heart(Vector2D(50, 50),Vector2D(125,75));
     Angle angle = Angle(Vector2D(-60, 50),Vector2D(125,75));
 
+    uint8_t noVisorThreashold = 50;
+
     void LinkControlParameters() override {
         AddParameter(MatthewFace::Anger, pM.GetMorphWeightReference(MatthewFace::Anger), 15);
         AddParameter(MatthewFace::Sadness, pM.GetMorphWeightReference(MatthewFace::Sadness), 15, IEasyEaseAnimator::InterpolationMethod::Cosine);
@@ -144,6 +146,11 @@ public:
 
         controller.SetBrightness(Menu::GetBrightness());
         controller.SetAccentBrightness(Menu::GetAccentBrightness());
+
+        if (boop.GetValue() < noVisorThreashold) {
+            controller.SetBrightness(0);
+            controller.SetAccentBrightness(0);
+        }
 
         uint8_t mode = Menu::GetFaceState();//change by button press
 
