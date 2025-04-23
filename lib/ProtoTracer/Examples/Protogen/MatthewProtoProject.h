@@ -24,7 +24,7 @@ private:
     Heart heart = Heart(Vector2D(50, 50),Vector2D(125,75));
     Angle angle = Angle(Vector2D(-60, 50),Vector2D(125,75));
 
-    uint8_t noVisorThreashold = 50;
+    uint8_t noVisorThreashold = 20;
 
     void LinkControlParameters() override {
         AddParameter(MatthewFace::Anger, pM.GetMorphWeightReference(MatthewFace::Anger), 15);
